@@ -22,9 +22,9 @@ public class SzyfrCezara {
             char przesunietyZnak;
             if (Character.isLetter(znak)) {
                 if (Character.isLowerCase(znak)) {
-                    przesunietyZnak = (char) ((znak + klucz - 'a') % 26 + 'a');
+                    przesunietyZnak = (char) ((znak - klucz - 'a') % 26 + 'a');
                 } else {
-                    przesunietyZnak = (char) ((znak + klucz - 'A') % 26 + 'A');
+                    przesunietyZnak = (char) ((znak - klucz - 'A') % 26 + 'A');
                 }
                 zaszyfrowanie.append(przesunietyZnak);
             } else {

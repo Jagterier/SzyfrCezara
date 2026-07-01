@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 
 public class Szyfrowanie {
     private JPanel pMain;
@@ -22,6 +21,7 @@ public class Szyfrowanie {
     private JLabel wpiszSzyfrLabel;
     private JLabel twójZaszyfrowanyTekstLabel;
     private JLabel wpiszTekstLabel;
+    private JButton btn2;
     private String ukryty;
 
     public Szyfrowanie() {
@@ -58,6 +58,20 @@ public class Szyfrowanie {
                     JOptionPane.showMessageDialog(pMain, "Zapisano na Pulpicie");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
+                }
+            }
+        });
+        btn2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String kluczWartosc = textSzyfr.getText();
+                int kluczLiczba = Integer.parseInt(kluczWartosc);
+                String text2 = textAreaSzyfrowanie.getText();
+                String odkryty = SzyfrCezara.odszyfruj(kluczLiczba, text2);
+                if (text2.isEmpty()) {
+                    textAreaSzyfrowanie.setText("Najpierw coś zaszyfruj");
+                } else {
+                    textAreaSzyfr.setText(odkryty);
                 }
             }
         });
@@ -131,6 +145,11 @@ public class Szyfrowanie {
         pMain.add(twójZaszyfrowanyTekstLabel, new GridConstraints(3, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         pMain.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        pMain.add(spacer2, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        btn2 = new JButton();
+        btn2.setText("Odszyfruj");
+        pMain.add(btn2, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         wpiszTekstLabel.setLabelFor(textAreaSzyfr);
     }
 
